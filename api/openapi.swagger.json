@@ -1,0 +1,120 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "calulator/calculator.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "calculator.CalculatorService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/calculator/add": {
+      "post": {
+        "operationId": "CalculatorService_Add",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/calculatorAddResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/calculatorAddRequest"
+            }
+          }
+        ],
+        "tags": [
+          "calculator.CalculatorService"
+        ]
+      }
+    },
+    "/v1/calculator/modulo": {
+      "post": {
+        "operationId": "CalculatorService_Modulo",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/calculatorModuloResponse"
+                }
+              },
+              "title": "Stream result of calculatorModuloResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/calculatorModuloRequest"
+            }
+          }
+        ],
+        "tags": [
+          "calculator.CalculatorService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "calculatorAddRequest": {
+      "type": "object",
+      "properties": {
+        "a": {
+          "type": "string",
+          "format": "int64"
+        },
+        "b": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "calculatorAddResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "calculatorModuloRequest": {
+      "type": "object",
+      "properties": {
+        "a": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "calculatorModuloResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    }
+  }
+}

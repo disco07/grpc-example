@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+option go_package = "github.com/disco07/gRPC/generated/calculator";
+
+package calculator;
+
+import "google/api/annotations.proto";
+
+message AddRequest {
+  int64 a = 1;
+  int64 b = 2;
+}
+
+message AddResponse {
+  int64 result = 1;
+}
+
+message ModuloRequest {
+  int64 a = 1;
+}
+
+message ModuloResponse {
+  int64 result = 1;
+}
+
+service CalculatorService {
+  rpc Add(AddRequest) returns (AddResponse) {
+    option (google.api.http) = {
+      post: "/v1/calculator/add",
+      body: "*"
+    };
+  };
+  rpc Modulo(ModuloRequest) returns (stream ModuloResponse) {
+    option (google.api.http) = {
+      post: "/v1/calculator/modulo",
+      body: "*"
+    };
+  };
+}
