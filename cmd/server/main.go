@@ -7,7 +7,7 @@ import (
 	"net"
 	"time"
 
-	"github.com/disco07/gRPC/generated/calulator"
+	"github.com/disco07/gRPC/generated/calculator"
 	"github.com/disco07/gRPC/internal"
 	"go.uber.org/fx"
 	"google.golang.org/grpc"

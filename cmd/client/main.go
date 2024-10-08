@@ -7,7 +7,7 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/disco07/gRPC/generated/calulator"
+	"github.com/disco07/gRPC/generated/calculator"
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
 	"go.uber.org/fx"
 	"google.golang.org/grpc"
@@ -68,7 +68,9 @@ var Module = fx.Options(
 		NewServeMux,
 		NewContext,
 	),
-	fx.Invoke(calculator.RegisterCalculatorServiceHandler),
+	fx.Invoke(
+		calculator.RegisterCalculatorServiceHandler,
+	),
 	fx.Invoke(StartHTTPServer),
 )
 

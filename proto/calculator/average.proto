@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+option go_package = "github.com/disco07/gRPC/generated/calculator";
+
+package calculator;
+
+message AverageRequest {
+  int64 a = 1;
+}
+
+message AverageResponse {
+  float result = 1;
+}

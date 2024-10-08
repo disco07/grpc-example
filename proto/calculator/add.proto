@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+option go_package = "github.com/disco07/gRPC/generated/calculator";
+
+package calculator;
+
+message AddRequest {
+  int64 a = 1;
+  int64 b = 2;
+}
+
+message AddResponse {
+  int64 result = 1;
+}

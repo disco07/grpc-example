@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "calulator/calculator.proto",
+    "title": "calculator/add.proto",
     "version": "version not set"
   },
   "tags": [
@@ -34,6 +34,66 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/calculatorAddRequest"
+            }
+          }
+        ],
+        "tags": [
+          "calculator.CalculatorService"
+        ]
+      }
+    },
+    "/v1/calculator/average": {
+      "post": {
+        "operationId": "CalculatorService_Average",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/calculatorAverageResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "description": " (streaming inputs)",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/calculatorAverageRequest"
+            }
+          }
+        ],
+        "tags": [
+          "calculator.CalculatorService"
+        ]
+      }
+    },
+    "/v1/calculator/max": {
+      "post": {
+        "operationId": "CalculatorService_Max",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/calculatorMaxResponse"
+                }
+              },
+              "title": "Stream result of calculatorMaxResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "description": " (streaming inputs)",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/calculatorMaxRequest"
             }
           }
         ],
@@ -90,6 +150,42 @@
       }
     },
     "calculatorAddResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "calculatorAverageRequest": {
+      "type": "object",
+      "properties": {
+        "a": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "calculatorAverageResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "type": "number",
+          "format": "float"
+        }
+      }
+    },
+    "calculatorMaxRequest": {
+      "type": "object",
+      "properties": {
+        "a": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "calculatorMaxResponse": {
       "type": "object",
       "properties": {
         "result": {
