@@ -70,8 +70,8 @@ var Module = fx.Options(
 	),
 	fx.Invoke(
 		calculator.RegisterCalculatorServiceHandler,
+		StartHTTPServer,
 	),
-	fx.Invoke(StartHTTPServer),
 )
 
 func main() {
