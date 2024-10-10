@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"fmt"
+	"github.com/disco07/gRPC/generated/users"
 	"google.golang.org/grpc/metadata"
 	"log"
 	"net/http"
@@ -70,6 +71,7 @@ var Module = fx.Options(
 	),
 	fx.Invoke(
 		calculator.RegisterCalculatorServiceHandler,
+		users.RegisterUserServiceHandler,
 		StartHTTPServer,
 	),
 )

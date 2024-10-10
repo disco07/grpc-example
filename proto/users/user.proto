@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+option go_package = "github.com/disco07/gRPC/generated/users";
+
+package users;
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+
+message User {
+  sint32 id = 1;
+  string username = 2;
+  bool is_active = 3;
+  string password = 4;
+}
+
+message CreateUserRequest {
+  string username = 1;
+  bool is_active = 2;
+  string password = 3;
+}
+
+message GetUserRequest {
+  sint32 id = 1;
+}
+
+service UserService {
+  rpc Create(CreateUserRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      post: "/v1/users",
+      body: "*"
+    };
+  };
+  rpc Get(GetUserRequest) returns (User) {
+    option (google.api.http) = {
+      get: "/v1/users/{id}"
+    };
+  };
+}

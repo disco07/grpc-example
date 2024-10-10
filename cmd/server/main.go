@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"fmt"
+	"github.com/disco07/gRPC/generated/users"
 	"log/slog"
 	"net"
 	"time"
@@ -23,6 +24,7 @@ var Module = fx.Options(
 	),
 	fx.Invoke(
 		calculator.RegisterCalculatorServiceServer,
+		users.RegisterUserServiceServer,
 	),
 )
 

@@ -7,6 +7,9 @@
   "tags": [
     {
       "name": "calculator.CalculatorService"
+    },
+    {
+      "name": "users.UserService"
     }
   ],
   "consumes": [
@@ -133,6 +136,58 @@
           "calculator.CalculatorService"
         ]
       }
+    },
+    "/v1/users": {
+      "post": {
+        "operationId": "UserService_Create",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/usersCreateUserRequest"
+            }
+          }
+        ],
+        "tags": [
+          "users.UserService"
+        ]
+      }
+    },
+    "/v1/users/{id}": {
+      "get": {
+        "operationId": "UserService_Get",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/usersUser"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": [
+          "users.UserService"
+        ]
+      }
     }
   },
   "definitions": {
@@ -209,6 +264,38 @@
         "result": {
           "type": "string",
           "format": "int64"
+        }
+      }
+    },
+    "usersCreateUserRequest": {
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string"
+        },
+        "isActive": {
+          "type": "boolean"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+    "usersUser": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "username": {
+          "type": "string"
+        },
+        "isActive": {
+          "type": "boolean"
+        },
+        "password": {
+          "type": "string"
         }
       }
     }
