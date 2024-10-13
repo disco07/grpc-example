@@ -19,7 +19,9 @@ func (u Users) Create(_ context.Context, req *users.CreateUserRequest) (*emptypb
 	log.Println("Create user")
 	log.Println("Username:", req.GetUsername())
 	log.Println("Is active:", req.GetIsActive())
-	log.Println("Password:", req.GetPassword())
+	log.Println("Password:", string(req.GetPassword()))
+	log.Println("Gender:", req.GetGender())
+	log.Println("Emails:", req.GetEmails())
 
 	return &emptypb.Empty{}, nil
 }
@@ -28,9 +30,11 @@ func (u Users) Get(_ context.Context, req *users.GetUserRequest) (*users.User, e
 	if req.GetId() == 1 {
 		return &users.User{
 			Id:       1,
-			Username: "user1",
+			Username: "john doe",
 			IsActive: true,
 			Password: "password1",
+			Gender:   users.Gender_MALE,
+			Emails:   []string{"john.doe@gmail.com"},
 		}, nil
 	}
 

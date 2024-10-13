@@ -277,9 +277,28 @@
           "type": "boolean"
         },
         "password": {
-          "type": "string"
+          "type": "string",
+          "format": "byte"
+        },
+        "gender": {
+          "$ref": "#/definitions/usersGender"
+        },
+        "emails": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
+    },
+    "usersGender": {
+      "type": "string",
+      "enum": [
+        "MALE",
+        "FEMALE",
+        "UNKNOWN"
+      ],
+      "default": "MALE"
     },
     "usersUser": {
       "type": "object",
@@ -296,6 +315,15 @@
         },
         "password": {
           "type": "string"
+        },
+        "gender": {
+          "$ref": "#/definitions/usersGender"
+        },
+        "emails": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     }

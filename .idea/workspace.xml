@@ -4,7 +4,13 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6c082a47-e651-48ec-8805-61aa546b7b6a" name="Changes" comment="refacto de code" />
+    <list default="true" id="6c082a47-e651-48ec-8805-61aa546b7b6a" name="Changes" comment="ajout de nouvelle route">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/openapi.swagger.json" beforeDir="false" afterPath="$PROJECT_DIR$/api/openapi.swagger.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/generated/users/user.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/generated/users/user.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/users/users.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/users/users.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/users/user.proto" beforeDir="false" afterPath="$PROJECT_DIR$/proto/users/user.proto" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -86,8 +92,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Go Build.go build github.com/disco07/gRPC/cmd/server" />
         <item itemvalue="Go Build.go build github.com/disco07/gRPC/cmd/client" />
+        <item itemvalue="Go Build.go build github.com/disco07/gRPC/cmd/server" />
       </list>
     </recent_temporary>
   </component>
@@ -107,7 +113,8 @@
     <MESSAGE value="first commit" />
     <MESSAGE value="créer de nouveau de grpc" />
     <MESSAGE value="refacto de code" />
-    <option name="LAST_COMMIT_MESSAGE" value="refacto de code" />
+    <MESSAGE value="ajout de nouvelle route" />
+    <option name="LAST_COMMIT_MESSAGE" value="ajout de nouvelle route" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>
