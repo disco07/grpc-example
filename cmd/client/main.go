@@ -2,81 +2,45 @@ package main
 
 import (
 	"context"
-	"fmt"
-	"github.com/disco07/gRPC/generated/users"
-	"google.golang.org/grpc/metadata"
-	"log"
-	"net/http"
-
 	"github.com/disco07/gRPC/generated/calculator"
-	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
+	"github.com/disco07/gRPC/generated/users"
+	"github.com/disco07/grpc-lib/client"
+	"github.com/disco07/grpc-lib/server"
 	"go.uber.org/fx"
-	"google.golang.org/grpc"
-	"google.golang.org/grpc/credentials/insecure"
+	"google.golang.org/grpc/metadata"
 )
 
-func NewGRPCClientConn(lc fx.Lifecycle) (*grpc.ClientConn, error) {
-	grpcAddr := "localhost:50051"
-
-	conn, err := grpc.NewClient(grpcAddr, grpc.WithTransportCredentials(insecure.NewCredentials()))
-	if err != nil {
-		return nil, fmt.Errorf("could not connect to order service: %w", err)
-	}
-
-	lc.Append(fx.Hook{
-		OnStop: func(ctx context.Context) error {
-			fmt.Println("Closing gRPC connection")
-			return conn.Close()
-		},
-	})
-
-	return conn, nil
-}
-
-func NewServeMux() *runtime.ServeMux {
-	return runtime.NewServeMux()
-}
-
-func NewContext() context.Context {
+func newContext() context.Context {
 	ctx := context.Background()
 	ctx = metadata.NewOutgoingContext(ctx, metadata.Pairs("key", "value"))
 	return ctx
+
 }
 
-func StartHTTPServer(lc fx.Lifecycle, mux *runtime.ServeMux) {
-	addr := "0.0.0.0:8080"
-	lc.Append(fx.Hook{
-		OnStart: func(ctx context.Context) error {
-			go func() {
-				fmt.Println("API gateway server is running on " + addr)
-				if err := http.ListenAndServe(addr, mux); err != nil {
-					log.Fatalf("gateway server closed abruptly: %v", err)
-				}
-			}()
+func newGRPCConfigServer() server.GRPCConfigServer {
+	return server.YAMLGRPCConfigServer{
+		ValuePort: 50051,
+	}
+}
 
-			return nil
-		},
-		OnStop: func(ctx context.Context) error {
-			fmt.Println("Stopping HTTP server")
-			return nil
-		},
-	})
+func newGRPCConfigClient() client.GRPCConfigClient {
+	return client.YAMLGRPCConfigClient{
+		ValuePort: 8090,
+	}
 }
 
 var Module = fx.Options(
-	fx.Provide(
-		NewGRPCClientConn,
-		NewServeMux,
-		NewContext,
-	),
+	client.Module,
+	fx.Provide(newGRPCConfigClient, newContext, newGRPCConfigServer),
 	fx.Invoke(
 		calculator.RegisterCalculatorServiceHandler,
 		users.RegisterUserServiceHandler,
-		StartHTTPServer,
 	),
 )
 
 func main() {
-	app := fx.New(Module)
+	app := fx.New(
+		Module,
+	)
 	app.Run()
 }
